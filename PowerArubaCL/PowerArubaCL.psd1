@@ -9,7 +9,7 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    # RootModule = ''
+    RootModule        = 'PowerArubaCL.psm1'
 
     # Version number of this module.
     ModuleVersion     = '0.0.1'
@@ -24,7 +24,7 @@
     Author            = 'Alexis La Goutte'
 
     # Company or vendor of this module
-    CompanyName       = 'Unknown'
+    #CompanyName       = 'Unknown'
 
     # Copyright statement for this module
     Copyright         = '(c) Alexis La Goutte. All rights reserved.'
@@ -33,7 +33,7 @@
     Description       = 'PowerShell module to query the Aruba Central API'
 
     # Minimum version of the PowerShell engine required by this module
-    PowerShellVersion = '3.0'
+    PowerShellVersion = '5.0'
 
     # Name of the PowerShell host required by this module
     # PowerShellHostName = ''
@@ -63,22 +63,22 @@
     # TypesToProcess = @()
 
     # Format files (.ps1xml) to be loaded when importing this module
-    FormatsToProcess  = 'PowerArubaCL.Format.ps1xml'
+    #FormatsToProcess  = 'PowerArubaCL.Format.ps1xml'
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     # NestedModules = @()
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport = @()
+    FunctionsToExport = '*'
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-    CmdletsToExport   = @()
+    CmdletsToExport   = '*'
 
     # Variables to export from this module
     VariablesToExport = '*'
 
     # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-    AliasesToExport   = @()
+    AliasesToExport   = '*'
 
     # DSC resources to export from this module
     # DscResourcesToExport = @()
