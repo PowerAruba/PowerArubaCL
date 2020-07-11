@@ -95,16 +95,16 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            # Tags = @()
+            Tags       = @('Aruba', 'HPE', 'Central', 'Cloud', 'AccessPoint', 'Switch', 'PSEdition_Core', 'PSEdition_Desktop')
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri = 'https://github.com/PowerAruba/PowerArubaCL/blob/master/LICENSE'
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri = 'https://github.com/PowerAruba/PowerArubaCL'
 
             # A URL to an icon representing this module.
-            # IconUri = ''
+            # IconUri = 'https://raw.githubusercontent.com/PowerAruba/PowerArubaCL/master/Medias/PowerArubaCL.png'
 
             # ReleaseNotes of this module
             # ReleaseNotes = ''
