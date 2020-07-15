@@ -37,7 +37,7 @@ function Invoke-ArubaCLRestMethod {
         [ValidateSet("GET", "PUT", "POST", "DELETE")]
         [String]$method = "get",
         [Parameter(Mandatory = $false)]
-        [psobject]$body,
+        [psobject]$body
     )
 
     Begin {
