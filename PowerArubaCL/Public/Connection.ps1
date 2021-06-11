@@ -8,37 +8,27 @@ function Connect-ArubaCL {
 
     <#
       .SYNOPSIS
-      Connect to a Aruba Central
+      Connect to Aruba Central
 
       .DESCRIPTION
-      Connect to a Aruba Central
+      Connect to Aruba Central
 
       .EXAMPLE
-      Connect-ArubaCL -Server 192.0.2.1
+      Connect-ArubaCL -region EU-1
 
-      Connect to a Aruba Central with IP 192.0.2.1 using (Get-)credential
-
-     .EXAMPLE
-      Connect-ArubaCL -Server 192.0.2.1 -CL_ip_addr 192.0.2.2
-
-      Connect to a Aruba Central with IP 192.0.2.1 and CL IP (query AP) 192.0.2.2 using (Get-)credential
-
-      .EXAMPLE
-      Connect-ArubaCL -Server 192.0.2.1 -SkipCertificateCheck
-
-      Connect to an Aruba Central using HTTPS (without check certificate validation) with IP 192.0.2.1 using (Get-)credential
+      Connect to Aruba Central on region EU-1 using (Get-)credential
 
       .EXAMPLE
       $cred = get-credential
-      PS C:\>Connect-ArubaCL -Server 192.0.2.1 -credential $cred
+      PS C:\>Connect-ArubaCL -region EU-1 -credential $cred
 
-      Connect to a Aruba Central with IP 192.0.2.1 and passing (Get-)credential
+      Connect to Aruba Central on region EU-1 and passing (Get-)credential
 
       .EXAMPLE
       $mysecpassword = ConvertTo-SecureString aruba -AsPlainText -Force
-      PS C:\>Connect-ArubaCL -Server 192.0.2.1 -Username admin -Password $mysecpassword
+      PS C:\>Connect-ArubaCL -region EU-1 -Username admin -Password $mysecpassword
 
-      Connect to a Aruba Central with IP 192.0.2.1 using Username and Password
+      Connect to Aruba Central on region EU-1 using Username and Password
   #>
 
     Param(
