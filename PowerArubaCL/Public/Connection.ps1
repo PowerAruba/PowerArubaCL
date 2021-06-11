@@ -49,7 +49,7 @@ function Connect-ArubaCL {
         [Parameter(Mandatory = $false)]
         [SecureString]$Password,
         [Parameter(Mandatory = $false)]
-        [PSCredential]$Credentials,
+        [PSCredential]$Credential,
         [Parameter(Mandatory = $true)]
         [String]$client_id,
         [Parameter(Mandatory = $true)]
@@ -66,14 +66,14 @@ function Connect-ArubaCL {
         $connection = @{server = ""; session = ""; access_token = ""; headers = ""; invokeParams = ""}
         $invokeParams = @{ UseBasicParsing = $true; }
 
-        #If there is a password (and a user), create a credentials
+        #If there is a password (and a user), create a credential
         if ($Password) {
-            $Credentials = New-Object System.Management.Automation.PSCredential($Username, $Password)
+            $Credential = New-Object System.Management.Automation.PSCredential($Username, $Password)
         }
 
-        #Not Credentials (and no password)
-        if ($null -eq $Credentials) {
-            $Credentials = Get-Credential -Message 'Please enter administrative credentials for your Aruba Central'
+        #Not Credential (and no password)
+        if ($null -eq $Credential) {
+            $Credential = Get-Credential -Message 'Please enter administrative credential for your Aruba Central'
         }
 
         #for PowerShell (<=) 5 (Desktop), Enable TLS 1.1, 1.2
@@ -94,7 +94,7 @@ function Connect-ArubaCL {
             }
 
         }
-        $postParams = @{username = $Credentials.username; password = $Credentials.GetNetworkCredential().Password }
+        $postParams = @{username = $Credential.username; password = $Credential.GetNetworkCredential().Password }
 
         $url = "https://${Server}/oauth2/authorize/central/api/login"
         $url += "?client_id=${client_id}"
