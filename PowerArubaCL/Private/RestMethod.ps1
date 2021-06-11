@@ -74,6 +74,9 @@ function Invoke-ArubaCLRestMethod {
         $sessionvariable = $DefaultArubaCLConnection.session
         try {
             if ($body) {
+
+                Write-Verbose ($body | ConvertTo-Json)
+
                 $response = Invoke-RestMethod $fullurl -Method $method -body ($body | ConvertTo-Json) -Headers $headers -WebSession $sessionvariable @invokeParams
             }
             else {
