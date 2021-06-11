@@ -37,7 +37,11 @@ function Invoke-ArubaCLRestMethod {
         [ValidateSet("GET", "PUT", "POST", "DELETE")]
         [String]$method = "get",
         [Parameter(Mandatory = $false)]
-        [psobject]$body
+        [psobject]$body,
+        [Parameter(Mandatory = $false)]
+        [int]$offset,
+        [Parameter(Mandatory = $false)]
+        [int]$limit
     )
 
     Begin {
@@ -57,6 +61,14 @@ function Invoke-ArubaCLRestMethod {
         $fullurl = "https://${Server}/${uri}"
         if ($fullurl -NotMatch "\?") {
             $fullurl += "?"
+        }
+
+        if ( $PsBoundParameters.ContainsKey('offset') ) {
+            $fullurl += "&offset=$offset"
+        }
+
+        if ( $PsBoundParameters.ContainsKey('limit') ) {
+            $fullurl += "&limit=$limit"
         }
 
         $sessionvariable = $DefaultArubaCLConnection.session
