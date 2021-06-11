@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-function Get-ArubaCLDevices {
+function Get-ArubaCLInventoryDevices {
 
     <#
       .SYNOPSIS
@@ -14,12 +14,12 @@ function Get-ArubaCLDevices {
       Get Devices on Aruba Central
 
       .EXAMPLE
-      Get-ArubaCLDevices -type IAP
+      Get-ArubaCLInventoryDevices -type IAP
 
       Get the 50th first iap on central
 
      .EXAMPLE
-      Get-ArubaCLDevices -type IAP -offset -limit
+      Get-ArubaCLInventoryDevices -type IAP -limit 2000 -offset 0
 
       Get all the IAP (Limit 2000, starting offset at 0)
     #>
@@ -29,9 +29,9 @@ function Get-ArubaCLDevices {
         [ValidateSet('IAP', 'MAS')]
         [String]$type,
         [Parameter(Mandatory = $false)]
-        [switch]$offset,
+        [int]$offset,
         [Parameter(Mandatory = $false)]
-        [switch]$limit
+        [int]$limit
     )
 
     Begin {
@@ -39,17 +39,20 @@ function Get-ArubaCLDevices {
 
     Process {
 
-        $uri = "/platform/device_inventory/v1/devices?sku_type=$type"
 
-        if ( $PsBoundParameters.ContainsKey('offset') ) {
-            $uri += "&offset=0"
-        }
+
+        $invokeParams = @{ }
 
         if ( $PsBoundParameters.ContainsKey('limit') ) {
-            $uri += "&limit=2000"
+            $invokeParams.add( 'limit', $limit )
+        }
+        if ( $PsBoundParameters.ContainsKey('offset') ) {
+            $invokeParams.add( 'offset', $offset )
         }
 
-        $device = Invoke-ArubaCLRestMethod -uri $uri -method GET
+        $uri = "/platform/device_inventory/v1/devices?sku_type=$type"
+
+        $device = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams
 
         $device.devices
 
