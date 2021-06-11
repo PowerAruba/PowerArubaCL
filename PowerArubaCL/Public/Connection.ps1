@@ -29,11 +29,6 @@ function Connect-ArubaCL {
       Connect to an Aruba Central using HTTPS (without check certificate validation) with IP 192.0.2.1 using (Get-)credential
 
       .EXAMPLE
-      Connect-ArubaCL -Server 192.0.2.1 -port 4443
-
-      Connect to an Aruba Central with port 4443 with IP 192.0.2.1 using (Get-)credential
-
-      .EXAMPLE
       $cred = get-credential
       PS C:\>Connect-ArubaCL -Server 192.0.2.1 -credential $cred
 
@@ -60,10 +55,7 @@ function Connect-ArubaCL {
         [Parameter(Mandatory = $true)]
         [String]$client_secret,
         [Parameter(Mandatory = $true)]
-        [String]$customer_id,
-        [Parameter(Mandatory = $false)]
-        [ValidateRange(1, 65535)]
-        [int]$port = 443
+        [String]$customer_id
     )
 
     Begin {
@@ -71,7 +63,7 @@ function Connect-ArubaCL {
 
     Process {
 
-        $connection = @{server = ""; session = ""; access_token = ""; headers = ""; invokeParams = ""; port = $port }
+        $connection = @{server = ""; session = ""; access_token = ""; headers = ""; invokeParams = ""}
         $invokeParams = @{ UseBasicParsing = $true; }
 
         #If there is a password (and a user), create a credentials
@@ -104,7 +96,7 @@ function Connect-ArubaCL {
         }
         $postParams = @{username = $Credentials.username; password = $Credentials.GetNetworkCredential().Password }
 
-        $url = "https://${Server}:${port}/oauth2/authorize/central/api/login"
+        $url = "https://${Server}/oauth2/authorize/central/api/login"
         $url += "?client_id=${client_id}"
         $headers = @{ Accept = "application/json"; "Content-type" = "application/json" }
 
@@ -133,7 +125,7 @@ function Connect-ArubaCL {
             }
         }
 
-        $url = "https://${Server}:${port}/oauth2/authorize/central/api"
+        $url = "https://${Server}/oauth2/authorize/central/api"
         $url += "?client_id=${client_id}&response_type=code&scope=all"
         $headers = @{ Accept = "application/json"; "Content-type" = "application/json" ; "Cookie" = $cookie_session ; "X-CSRF-TOKEN" = $cookie_csrf }
         $postParams = @{ customer_id = $customer_id }
@@ -148,7 +140,7 @@ function Connect-ArubaCL {
 
         $auth_code = $response.auth_code
 
-        $url = "https://${Server}:${port}/oauth2/token"
+        $url = "https://${Server}/oauth2/token"
         $url += "?client_id=${client_id}&client_secret=${client_secret}&grant_type=authorization_code&code=${auth_code}"
         $headers = @{ Accept = "application/json"; "Content-type" = "application/json" }
 
@@ -169,7 +161,6 @@ function Connect-ArubaCL {
         $connection.invokeParams = $invokeParams
         #TODO Need to store refresh_token and expires_in...
         $connection.access_token = $response.access_token
-        $connection.port = $port
 
         Set-Variable -name DefaultArubaCLConnection -value $connection -scope Global
 

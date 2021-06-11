@@ -53,9 +53,8 @@ function Invoke-ArubaCLRestMethod {
         $headers = ${DefaultArubaCLConnection}.headers
         $invokeParams = ${DefaultArubaCLConnection}.invokeParams
         $access_token = ${DefaultArubaCLConnection}.access_token
-        $port = ${DefaultArubaCLConnection}.port
 
-        $fullurl = "https://${Server}:${port}/${uri}"
+        $fullurl = "https://${Server}/${uri}"
         if ($fullurl -NotMatch "\?") {
             $fullurl += "?"
         }
