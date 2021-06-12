@@ -46,7 +46,9 @@ function Connect-ArubaCL {
         [Parameter(Mandatory = $true)]
         [String]$client_secret,
         [Parameter(Mandatory = $true)]
-        [String]$customer_id
+        [String]$customer_id,
+        [Parameter(Mandatory = $false)]
+        [boolean]$DefaultConnection = $true
     )
 
     Begin {
@@ -174,7 +176,9 @@ function Connect-ArubaCL {
         #TODO Need to store refresh_token and expires_in...
         $connection.access_token = $response.access_token
 
-        Set-Variable -name DefaultArubaCLConnection -value $connection -scope Global
+        if ( $DefaultConnection ) {
+            Set-Variable -name DefaultArubaCLConnection -value $connection -scope Global
+        }
 
         $connection
     }

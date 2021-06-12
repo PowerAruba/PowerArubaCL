@@ -41,7 +41,9 @@ function Invoke-ArubaCLRestMethod {
         [Parameter(Mandatory = $false)]
         [int]$offset,
         [Parameter(Mandatory = $false)]
-        [int]$limit
+        [int]$limit,
+        [Parameter(Mandatory = $false)]
+        [psobject]$connection = $DefaultArubaCLConnection
     )
 
     Begin {
@@ -49,14 +51,15 @@ function Invoke-ArubaCLRestMethod {
 
     Process {
 
-        if ($null -eq $DefaultArubaCLConnection) {
+        if ($null -eq $connection) {
             Throw "Not Connected. Connect to the Aruba Central with Connect-ArubaCL"
         }
 
-        $Server = ${DefaultArubaCLConnection}.Server
-        $headers = ${DefaultArubaCLConnection}.headers
-        $invokeParams = ${DefaultArubaCLConnection}.invokeParams
-        #$access_token = ${DefaultArubaCLConnection}.access_token
+        $Server = $connection.Server
+        $headers = $connection.headers
+        $invokeParams = $connection.invokeParams
+        #$access_token = $connection.access_token
+        $sessionvariable = $connection.session
 
         $fullurl = "https://${Server}/${uri}"
         if ($fullurl -NotMatch "\?") {
@@ -71,7 +74,6 @@ function Invoke-ArubaCLRestMethod {
             $fullurl += "&limit=$limit"
         }
 
-        $sessionvariable = $DefaultArubaCLConnection.session
         try {
             if ($body) {
 

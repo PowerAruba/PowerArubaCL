@@ -31,7 +31,10 @@ function Get-ArubaCLInventoryDevices {
         [Parameter(Mandatory = $false)]
         [int]$offset,
         [Parameter(Mandatory = $false)]
-        [int]$limit
+        [int]$limit,
+        [Parameter (Mandatory = $False)]
+        [ValidateNotNullOrEmpty()]
+        [PSObject]$connection = $DefaultArubaCLConnection
     )
 
     Begin {
@@ -52,7 +55,7 @@ function Get-ArubaCLInventoryDevices {
 
         $uri = "/platform/device_inventory/v1/devices?sku_type=$type"
 
-        $device = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams
+        $device = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams -connection $connection
 
         $device.devices
 
