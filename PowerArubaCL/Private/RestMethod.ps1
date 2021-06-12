@@ -1,5 +1,5 @@
 #
-# Copyright 2020, Alexis La Goutte <alexis dot lagoutte at gmail dot com>
+# Copyright 2021, Alexis La Goutte <alexis dot lagoutte at gmail dot com>
 #
 # SPDX-License-Identifier: Apache-2.0
 #
