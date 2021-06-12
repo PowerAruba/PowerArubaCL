@@ -33,6 +33,7 @@ function Connect-ArubaCL {
 
     Param(
         [Parameter(Mandatory = $true, position = 1)]
+        [ValidateSet('APAC-1', 'APAC-EAST1', 'APAC-SOUTH1', 'Canada-1', 'China-1', 'EU-1', 'US-1', 'US-2')]
         [String]$region,
         [Parameter(Mandatory = $false)]
         [String]$Username,
@@ -79,11 +80,32 @@ function Connect-ArubaCL {
 
         #Region
         switch ($region) {
+            'APAC-1' {
+                $server = "api-ap.central.arubanetworks.com"
+            }
+            'APAC-EAST1' {
+                $server = "apigw-apaceast.central.arubanetworks.com"
+            }
+            'APAC-SOUTH1' {
+                $server = "apigw-apacsouth.central.arubanetworks.com"
+            }
+            'Canada-1' {
+                $server = "apigw-ca.central.arubanetworks.com"
+            }
+            'China-1' {
+                $server = "apigw.central.arubanetworks.com.cn"
+            }
             'EU-1' {
                 $server = "eu-apigw.central.arubanetworks.com"
             }
-
+            'US-1' {
+                $server = "app1-apigw.central.arubanetworks.com"
+            }
+            'US-2' {
+                $server = "apigw-prod2.central.arubanetworks.com"
+            }
         }
+
         $postParams = @{username = $Credential.username; password = $Credential.GetNetworkCredential().Password }
 
         $url = "https://${Server}/oauth2/authorize/central/api/login"
