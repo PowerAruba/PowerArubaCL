@@ -92,7 +92,7 @@ function Invoke-ArubaCLRestMethod {
         #Only if limit is no set and $response.total is not empty
         if (-Not $limit -and $response.total) {
             #Search MemberType for count the number of response
-            $membertype = ($a | Get-Member -MemberType NoteProperty).name[0]
+            $membertype = ($response | Get-Member -MemberType NoteProperty).name[0]
             #Check if number a item return by Central API (total)) is superior to return item (and generate a warning about use -limit)
             if ($response.total -gt $response.$membertype.count) {
                 Write-Warning "There is extra items use -limit parameter to display"

@@ -53,7 +53,7 @@ function Connect-ArubaCL {
 
     Process {
 
-        $connection = @{server = ""; session = ""; access_token = ""; headers = ""; invokeParams = ""}
+        $connection = @{server = ""; session = ""; access_token = ""; headers = ""; invokeParams = "" }
         $invokeParams = @{ UseBasicParsing = $true; }
 
         #If there is a password (and a user), create a credential
@@ -89,7 +89,7 @@ function Connect-ArubaCL {
         $url = "https://${Server}/oauth2/authorize/central/api/login"
         $url += "?client_id=${client_id}"
         $headers = @{ Accept = "application/json"; "Content-type" = "application/json" }
-
+        Write-Verbose ($postParams | ConvertTo-Json)
         try {
             $response = Invoke-RestMethod $url -Method POST -Body ($postParams | ConvertTo-Json) -SessionVariable ArubaCL -headers $headers @invokeParams
         }
