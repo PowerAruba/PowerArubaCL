@@ -186,3 +186,49 @@ function Connect-ArubaCL {
     End {
     }
 }
+
+function Disconnect-ArubaCL {
+
+    <#
+        .SYNOPSIS
+        Disconnect to Aruba Central
+
+        .DESCRIPTION
+        Disconnect the connection on Aruba Central
+
+        .EXAMPLE
+        Disconnect-ArubaCL
+
+        Disconnect the connection
+
+        .EXAMPLE
+        Disconnect-ArubaCL -confirm:$false
+
+        Disconnect the connection with no confirmation
+
+    #>
+
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
+    Param(
+        [Parameter (Mandatory = $False)]
+        [ValidateNotNullOrEmpty()]
+        [PSObject]$connection = $DefaultArubaCLConnection
+    )
+
+    Begin {
+    }
+
+    Process {
+
+        if ($PSCmdlet.ShouldProcess($connection.server, 'Remove Aruba Central connection ?')) {
+            #Not really connection on CPPM with token
+            if ( ($connection -eq $DefaultArubaCLConnection) -and (Test-Path variable:global:DefaultArubaCLConnection) ) {
+                Remove-Variable -name DefaultArubaCLConnection -scope global
+            }
+        }
+
+    }
+
+    End {
+    }
+}
