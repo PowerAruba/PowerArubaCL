@@ -14,21 +14,21 @@ function Connect-ArubaCL {
       Connect to Aruba Central
 
       .EXAMPLE
-      Connect-ArubaCL -region EU-1
+      Connect-ArubaCL -region EU-1 -client_id MyClientID -client_secret MyClientSecret -customer_id MyCustomerId
 
-      Connect to Aruba Central on region EU-1 using (Get-)credential
+      Connect to Aruba Central on region EU-1 using (Get-)credential and client id/secret and customer(id)
 
       .EXAMPLE
       $cred = get-credential
-      PS C:\>Connect-ArubaCL -region EU-1 -credential $cred
+      PS C:\>Connect-ArubaCL -region EU-1 -client_id MyClientID -client_secret MyClientSecret -customer_id MyCustomerId -credential $cred
 
-      Connect to Aruba Central on region EU-1 and passing (Get-)credential
+      Connect to Aruba Central on region EU-1 and passing (Get-)credential and client id/secret and customer(id)
 
       .EXAMPLE
       $mysecpassword = ConvertTo-SecureString aruba -AsPlainText -Force
-      PS C:\>Connect-ArubaCL -region EU-1 -Username admin -Password $mysecpassword
+      PS C:\>Connect-ArubaCL -region EU-1 -client_id MyClientID -client_secret MyClientSecret -customer_id MyCustomerId -Username admin -Password $mysecpassword
 
-      Connect to Aruba Central on region EU-1 using Username and Password
+      Connect to Aruba Central on region EU-1 using Username and Password and client id/secret and customer(id)
   #>
 
     Param(
