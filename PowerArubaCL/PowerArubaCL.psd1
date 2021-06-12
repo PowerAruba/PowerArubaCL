@@ -104,7 +104,7 @@
             ProjectUri = 'https://github.com/PowerAruba/PowerArubaCL'
 
             # A URL to an icon representing this module.
-            # IconUri = 'https://raw.githubusercontent.com/PowerAruba/PowerArubaCL/master/Medias/PowerArubaCL.png'
+            IconUri    = 'https://raw.githubusercontent.com/PowerAruba/PowerArubaCL/master/Medias/PowerArubaCL.png'
 
             # ReleaseNotes of this module
             # ReleaseNotes = ''
