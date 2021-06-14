@@ -67,13 +67,12 @@ Create a `New Token`
 
 Click on `Generate`
 
-![](./Medias/api_gateway_client_id_secret.png)
+![](./Medias/api_gateway_client_id_secret.png)  
 now copy `Client ID` and `Client Secret`, you will need for connect
 
 Go now on the configuration for get the customer id
 it is available on the top right 
-![](./Medias/central_customer_id.png)
-
+![](./Medias/central_customer_id.png)  
 Copy `Customer ID` value
 
 
