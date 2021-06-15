@@ -96,9 +96,6 @@ function Get-ArubaCLInventoryDevices {
     }
 
     Process {
-
-
-
         $invokeParams = @{ }
 
         if ( $PsBoundParameters.ContainsKey('limit') ) {
@@ -113,7 +110,6 @@ function Get-ArubaCLInventoryDevices {
         $device = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams -connection $connection
 
         $device.devices
-
     }
 
     End {
