@@ -13,4 +13,4 @@ jobs:
     - uses: actions/checkout@v1
     - name: Publish
       run: |
-        pwsh -Command "Publish-Module -Path ./PowerArubaIAP -NuGetApiKey ${{ secrets.PSGALLERY_API_KEY }}"
+        pwsh -Command "Publish-Module -Path ./PowerArubaCL -NuGetApiKey ${{ secrets.PSGALLERY_API_KEY }}"
