@@ -11,22 +11,22 @@ function Invoke-ArubaCLRestMethod {
       Invoke RestMethod with ArubaCL connection (internal) variable
 
       .DESCRIPTION
-    Invoke RestMethod with ArubaCL connection variable (token, csrf..)
+       Invoke RestMethod with ArubaCL connection variable (token...)
 
       .EXAMPLE
-      Invoke-ArubaCLRestMethod -method "get" -uri "rest/virtual-controller-ip"
+      Invoke-ArubaCLRestMethod -method "get" -uri "platform/device_inventory/v1/devices"
 
-      Invoke-RestMethod with ArubaCL connection for get rest/v1/rest/virtual-controller-ip
-
-      .EXAMPLE
-      Invoke-ArubaCLRestMethod "rest/v1/rest/virtual-controller-ip"
-
-      Invoke-RestMethod with ArubaCL connection for get rest/v1/rest/virtual-controller-ip uri with default GET method parameter
+      Invoke-RestMethod with ArubaCL connection for get platform/device_inventory/v1/devices
 
       .EXAMPLE
-      Invoke-ArubaCLRestMethod -method "post" -uri "rest/v1/rest/virtual-controller-ip" -body $body
+      Invoke-ArubaCLRestMethod "platform/device_inventory/v1/devices"
 
-      Invoke-RestMethod with ArubaCL connection for post rest/v1/rest/virtual-controller-ip uri with $body payloaders
+      Invoke-RestMethod with ArubaCL connection for getplatform/device_inventory/v1/devices uri with default GET method parameter
+
+      .EXAMPLE
+      Invoke-ArubaCLRestMethod -method "post" -uri "platform/device_inventory/v1/devices" -body $body
+
+      Invoke-RestMethod with ArubaCL connection for post platform/device_inventory/v1/devices uri with $body payload
     #>
 
     [CmdletBinding(DefaultParametersetname = "default")]
