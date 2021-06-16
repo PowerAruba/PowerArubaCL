@@ -115,3 +115,52 @@ function Get-ArubaCLInventoryDevices {
     End {
     }
 }
+
+function Get-ArubaCLInventoryDevicesStats {
+
+    <#
+      .SYNOPSIS
+      Get Devices Stats on Aruba Central
+
+      .DESCRIPTION
+      Get Devices Statson Aruba Central
+
+      .EXAMPLE
+      Get-ArubaCLInventoryDevicesStats -type IAP -service dm
+
+      Get Device Stats for IAP of service DM
+
+     .EXAMPLE
+      Get-ArubaCLInventoryDevices -type MAS -service pa
+
+      Get Device Stats for MAS of service PA
+    #>
+
+    Param(
+        [Parameter(Mandatory = $true, position = 1)]
+        [ValidateSet('IAP', 'MAS')]
+        [String]$type,
+        [Parameter(Mandatory = $true)]
+        [ValidateSet('dm', 'pa')]
+        [String]$service,
+        [Parameter (Mandatory = $False)]
+        [ValidateNotNullOrEmpty()]
+        [PSObject]$connection = $DefaultArubaCLConnection
+    )
+
+    Begin {
+    }
+
+    Process {
+        $invokeParams = @{ }
+
+        $uri = "/platform/device_inventory/v1/devices/stats?sku_type=$type&service_type=$service"
+
+        $stats = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams -connection $connection
+
+        $stats
+    }
+
+    End {
+    }
+}
