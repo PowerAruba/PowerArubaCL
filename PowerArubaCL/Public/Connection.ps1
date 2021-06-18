@@ -56,7 +56,8 @@ function Connect-ArubaCL {
 
     Process {
 
-        $connection = @{server = ""; session = ""; access_token = ""; headers = ""; invokeParams = "" }
+        $token = @{access_token = ""; refresh_token = ""; expire = ""; client_id = ""; client_secret = "";}
+        $connection = @{server = ""; session = ""; token = $token; headers = ""; invokeParams = "" }
         $invokeParams = @{ UseBasicParsing = $true; }
 
         #If there is a password (and a user), create a credential
@@ -175,8 +176,13 @@ function Connect-ArubaCL {
         $connection.session = $ArubaCL
         $connection.headers = $headers
         $connection.invokeParams = $invokeParams
-        #TODO Need to store refresh_token and expires_in...
-        $connection.access_token = $response.access_token
+        #Store token..
+        $connection.token.client_id = $client_id
+        $connection.token.client_secret = $client_secret
+        $connection.token.access_token = $response.access_token
+        $connection.token.refresh_token = $response.refresh_token
+        #Get when token will be expire
+        $connection.token.expire = [int](Get-Date -UFormat %s) + $response.expires_in
 
         if ( $DefaultConnection ) {
             Set-Variable -name DefaultArubaCLConnection -value $connection -scope Global
