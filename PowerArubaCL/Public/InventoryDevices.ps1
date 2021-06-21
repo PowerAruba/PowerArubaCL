@@ -25,8 +25,6 @@ function Add-ArubaCLInventoryDevices {
         [string]$mac,
         [Parameter(Mandatory = $true)]
         [string]$serial,
-        [Parameter(Mandatory = $false)]
-        [string]$partNumber,
         [Parameter (Mandatory = $False)]
         [ValidateNotNullOrEmpty()]
         [PSObject]$connection = $DefaultArubaCLConnection
@@ -44,9 +42,6 @@ function Add-ArubaCLInventoryDevices {
         $_device += @{
             "mac"    = $mac
             "serial" = $serial
-        }
-        if ( $PsBoundParameters.ContainsKey('partNumber') ) {
-            #$_device.add( 'partNumber', $partNumber )
         }
 
         $uri = "/platform/device_inventory/v1/devices"
