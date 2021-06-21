@@ -116,6 +116,60 @@ function Get-ArubaCLInventoryDevices {
     }
 }
 
+function Get-ArubaCLInventoryDevicesArchive {
+
+    <#
+      .SYNOPSIS
+      Get Archived Devices on Aruba Central
+
+      .DESCRIPTION
+      Get Archived Devices on Aruba Central
+
+      .EXAMPLE
+      Get-ArubaCLInventoryDevicesArchive
+
+      Get Archived Device for IAP of service DM
+
+     .EXAMPLE
+      Get-ArubaCLInventoryDevices -limit 2000 -offset 0
+
+      Get Archived Devices (Limit 2000, starting offset at 0)
+    #>
+
+    Param(
+        [Parameter(Mandatory = $false)]
+        [int]$offset,
+        [Parameter(Mandatory = $false)]
+        [int]$limit,
+        [Parameter (Mandatory = $False)]
+        [ValidateNotNullOrEmpty()]
+        [PSObject]$connection = $DefaultArubaCLConnection
+    )
+
+    Begin {
+    }
+
+    Process {
+        $invokeParams = @{ }
+
+        if ( $PsBoundParameters.ContainsKey('limit') ) {
+            $invokeParams.add( 'limit', $limit )
+        }
+        if ( $PsBoundParameters.ContainsKey('offset') ) {
+            $invokeParams.add( 'offset', $offset )
+        }
+
+        $uri = "/platform/device_inventory/v1/devices/archive"
+
+        $archive = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams -connection $connection
+
+        $archive.devices
+    }
+
+    End {
+    }
+}
+
 function Get-ArubaCLInventoryDevicesStats {
 
     <#
