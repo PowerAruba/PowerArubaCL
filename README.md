@@ -114,6 +114,11 @@ You can get Inventory Devices
     services      : {}
     tier_type     :
     ...
+
+# Add Devices (need to known Mac Address and Serial Number)
+    Add-ArubaCLInventoryDevices -mac FC:7F:F2:88:11:22 -serial CNLBAD3C5DT
+
+    success
 ```
 
 
