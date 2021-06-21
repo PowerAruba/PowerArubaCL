@@ -59,6 +59,55 @@ function Add-ArubaCLInventoryDevices {
     }
 }
 
+function Add-ArubaCLInventoryDevicesArchive {
+
+    <#
+      .SYNOPSIS
+      Add Archived Devices on Aruba Central
+
+      .DESCRIPTION
+      Add Archived Devices on Aruba Central
+
+      .EXAMPLE
+      Add-ArubaCLInventoryDevicesArchive -serial CT05848405
+
+      Add Device with Serial CT05848405 on Archive
+
+      .EXAMPLE
+      Add-ArubaCLInventoryDevicesArchive -serial CT05848405
+
+      Add Devices with Serial CT05848405  on Archive
+    #>
+
+    Param(
+        [Parameter(Mandatory = $true)]
+        [string]$serial,
+        [Parameter (Mandatory = $False)]
+        [ValidateNotNullOrEmpty()]
+        [PSObject]$connection = $DefaultArubaCLConnection
+    )
+
+    Begin {
+    }
+
+    Process {
+        $invokeParams = @{ }
+
+        $_device = @{
+            "serials" = @($serial)
+        }
+
+        $uri = "/platform/device_inventory/v1/devices/archive"
+
+        $archive = Invoke-ArubaCLRestMethod -uri $uri  -body $_device -method POST @invokeParams -connection $connection
+
+        $archive
+    }
+
+    End {
+    }
+}
+
 function Get-ArubaCLInventoryDevices {
 
     <#
