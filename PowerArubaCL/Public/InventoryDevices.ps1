@@ -4,6 +4,62 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+function Add-ArubaCLInventoryDevices {
+
+    <#
+      .SYNOPSIS
+      Add Devices on Aruba Central
+
+      .DESCRIPTION
+      Add Devices (Serial and MAC Address) on Aruba Central
+
+      .EXAMPLE
+      Add-ArubaCLInventoryDevices -mac FC:7F:F1:C2:23:43 -serial CNLBPWSH
+
+      Add Device with MAC Address and serial on Inventory
+
+    #>
+
+    Param(
+        [Parameter(Mandatory = $true, position = 1)]
+        [string]$mac,
+        [Parameter(Mandatory = $true)]
+        [string]$serial,
+        [Parameter(Mandatory = $false)]
+        [string]$partNumber,
+        [Parameter (Mandatory = $False)]
+        [ValidateNotNullOrEmpty()]
+        [PSObject]$connection = $DefaultArubaCLConnection
+    )
+
+    Begin {
+    }
+
+    Process {
+
+        $invokeParams = @{ }
+
+        $_device = @( )
+
+        $_device += @{
+            "mac"    = $mac
+            "serial" = $serial
+        }
+        if ( $PsBoundParameters.ContainsKey('partNumber') ) {
+            #$_device.add( 'partNumber', $partNumber )
+        }
+
+        $uri = "/platform/device_inventory/v1/devices"
+
+        $device = Invoke-ArubaCLRestMethod -uri $uri -method POST -body $_device @invokeParams -connection $connection
+
+        $device.result
+    }
+
+    End {
+    }
+}
+
 function Get-ArubaCLInventoryDevices {
 
     <#
