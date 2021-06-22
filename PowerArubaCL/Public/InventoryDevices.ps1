@@ -74,14 +74,14 @@ function Add-ArubaCLInventoryDevicesArchive {
       Add Device with Serial CT05848405 on Archive
 
       .EXAMPLE
-      Add-ArubaCLInventoryDevicesArchive -serial CT05848405
+      Add-ArubaCLInventoryDevicesArchive -serial CT05848405, CT05848406
 
-      Add Devices with Serial CT05848405  on Archive
+      Add Devices with Serial CT05848405 and CT05848406 on Archive
     #>
 
     Param(
         [Parameter(Mandatory = $true)]
-        [string]$serial,
+        [string[]]$serial,
         [Parameter (Mandatory = $False)]
         [ValidateNotNullOrEmpty()]
         [PSObject]$connection = $DefaultArubaCLConnection
