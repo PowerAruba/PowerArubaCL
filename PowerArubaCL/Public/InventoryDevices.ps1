@@ -267,3 +267,52 @@ function Get-ArubaCLInventoryDevicesStats {
     End {
     }
 }
+
+function Remove-ArubaCLInventoryDevicesArchive {
+
+    <#
+      .SYNOPSIS
+      Remove Archived Devices on Aruba Central
+
+      .DESCRIPTION
+      Remove Archived Devices on Aruba Central
+
+      .EXAMPLE
+      Remove-ArubaCLInventoryDevicesArchive -serial CT05848405
+
+      Remove Device with Serial CT05848405 on Archive
+
+      .EXAMPLE
+      Remove-ArubaCLInventoryDevicesArchive -serial CT05848405, CT05848406
+
+      Remove Devices with Serial CT05848405 and CT05848406 on Archive
+    #>
+
+    Param(
+        [Parameter(Mandatory = $true)]
+        [string[]]$serial,
+        [Parameter (Mandatory = $False)]
+        [ValidateNotNullOrEmpty()]
+        [PSObject]$connection = $DefaultArubaCLConnection
+    )
+
+    Begin {
+    }
+
+    Process {
+        $invokeParams = @{ }
+
+        $_device = @{
+            "serials" = @($serial)
+        }
+
+        $uri = "/platform/device_inventory/v1/devices/unarchive"
+
+        $archive = Invoke-ArubaCLRestMethod -uri $uri  -body $_device -method POST @invokeParams -connection $connection
+
+        $archive
+    }
+
+    End {
+    }
+}
