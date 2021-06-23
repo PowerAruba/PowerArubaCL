@@ -73,6 +73,8 @@ function Connect-ArubaCL {
         if ("Desktop" -eq $PSVersionTable.PsEdition) {
             #Enable TLS 1.1 and 1.2
             Set-ArubaCLCipherSSL
+            #Remove System Array type for avoid count when convert to json
+            Remove-TypeData -TypeName System.Array
         }
         else {
             #Core Edition
