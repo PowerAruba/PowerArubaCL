@@ -40,8 +40,8 @@ function Add-ArubaCLInventoryDevices {
 
         $_device = @( )
 
-        #the MAC Address need to be separate with '-' ...
-        $mac = Format-MacAddress -MacAddress $mac -Separator '-'
+        #the MAC Address need to be separate with ':' ...
+        $mac = Format-ArubaCLMacAddress -MacAddress $mac -Separator ':'
 
         $_device += @{
             "mac"    = $mac
