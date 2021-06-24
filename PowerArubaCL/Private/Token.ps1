@@ -4,14 +4,14 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-function Update-ArubaCRefreshToken {
+function Update-ArubaCLRefreshToken {
     Param(
         [Parameter(Mandatory = $false)]
         [psobject]$connection = $DefaultArubaCLConnection
     )
 
-    $url = "https://"+$connection.server+"/oauth2/token"
-    $url += "?client_id="+$connection.token.client_id+"&client_secret="+$connection.token.client_secret+"&grant_type=refresh_token&refresh_token="+$connection.token.refresh_token
+    $url = "https://" + $connection.server + "/oauth2/token"
+    $url += "?client_id=" + $connection.token.client_id + "&client_secret=" + $connection.token.client_secret + "&grant_type=refresh_token&refresh_token=" + $connection.token.refresh_token
     $headers = @{ Accept = "application/json"; "Content-type" = "application/json" }
 
     Write-Verbose $url
