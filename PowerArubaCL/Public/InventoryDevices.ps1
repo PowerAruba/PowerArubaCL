@@ -288,6 +288,7 @@ function Remove-ArubaCLInventoryDevicesArchive {
       Remove Devices with Serial CT05848405 and CT05848406 on Archive
     #>
 
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'medium')]
     Param(
         [Parameter(Mandatory = $true)]
         [string[]]$serial,
@@ -308,9 +309,11 @@ function Remove-ArubaCLInventoryDevicesArchive {
 
         $uri = "/platform/device_inventory/v1/devices/unarchive"
 
-        $archive = Invoke-ArubaCLRestMethod -uri $uri  -body $_device -method POST @invokeParams -connection $connection
+        if ($PSCmdlet.ShouldProcess($serial -join ",", 'Remove device from Archive')) {
+            $archive = Invoke-ArubaCLRestMethod -uri $uri  -body $_device -method POST @invokeParams -connection $connection
 
-        $archive
+            $archive
+        }
     }
 
     End {
