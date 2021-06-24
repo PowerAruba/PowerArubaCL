@@ -77,9 +77,11 @@ function Invoke-ArubaCLRestMethod {
         try {
             if ($body) {
 
-                Write-Verbose ($body | ConvertTo-Json)
+                #don't use pipeline to convertto-json because remove array...
+                $jbody = ConvertTo-Json $body
+                Write-Verbose ($jbody)
 
-                $response = Invoke-RestMethod $fullurl -Method $method -body ($body | ConvertTo-Json) -Headers $headers -WebSession $sessionvariable @invokeParams
+                $response = Invoke-RestMethod $fullurl -Method $method -body ($jbody) -Headers $headers -WebSession $sessionvariable @invokeParams
             }
             else {
                 $response = Invoke-RestMethod $fullurl -Method $method -Headers $headers -WebSession $sessionvariable @invokeParams

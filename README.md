@@ -114,6 +114,11 @@ You can get Inventory Devices
     services      : {}
     tier_type     :
     ...
+
+# Add Devices (need to known Mac Address and Serial Number)
+    Add-ArubaCLInventoryDevices -mac FC:7F:F2:88:11:22 -serial CNLBAD3C5DT
+
+    success
 ```
 
 
@@ -232,6 +237,7 @@ Sort by name (*git shortlog -s*)
 
 - Warren F. for his [blog post](http://ramblingcookiemonster.github.io/Building-A-PowerShell-Module/) 'Building a Powershell module'
 - Erwan Quelin for help about Powershell
+- François-Xavier Cat (@lazywinadmin) for [Format/Clean MAC Address](https://github.com/lazywinadmin/PowerShell/blob/master/TOOL-Clean-MacAddress/Clean-MacAddress.ps1)
 
 # License
 
