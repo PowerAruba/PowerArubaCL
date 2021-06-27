@@ -9,7 +9,7 @@ This is a Powershell module for manage Aruba Central
 
 With this module (version 0.1.0) you can manage:
 
-- [Inventory](#Inventory) (Get Devices)
+- [Inventory](#Inventory) (Add/Get Devices, Add/Get/Remove Archived Devices)
 
 There is some extra feature
 - [Invoke API](#Invoke-API)
@@ -119,6 +119,30 @@ You can get Inventory Devices
     Add-ArubaCLInventoryDevices -mac FC:7F:F2:88:11:22 -serial CNLBAD3C5DT
 
     success
+
+# Get Archived Devices
+    Get-ArubaCLInventoryDevicesArchive
+
+    aruba_part_no : AP-505-RW
+    customer_id   : 987b69ccdfb03124feeb4a847b9f54d2
+    customer_name : PowerArubaCL
+    device_type   : iap
+    imei          :
+    macaddr       : B8:3A:5A:1C:22:1C
+    model         : R2H28A
+    serial        : CNJNK0N7PP
+
+
+# Add Devices to Archive (need to known Serial Number)
+    Add-ArubaCLInventoryDevicesArchive -serial CNJNK0N7PP
+
+    success
+
+# Remove Devices to Archive (need to known Serial Number)
+    Remove-ArubaCLInventoryDevicesArchive -serial CNJNK0N7PP
+
+    success
+
 ```
 
 
