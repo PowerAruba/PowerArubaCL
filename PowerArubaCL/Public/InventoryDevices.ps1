@@ -48,7 +48,7 @@ function Add-ArubaCLInventoryDevices {
             "serial" = $serial
         }
 
-        $uri = "/platform/device_inventory/v1/devices"
+        $uri = "platform/device_inventory/v1/devices"
 
         $device = Invoke-ArubaCLRestMethod -uri $uri -method POST -body $_device @invokeParams -connection $connection
 
@@ -97,7 +97,7 @@ function Add-ArubaCLInventoryDevicesArchive {
             "serials" = @($serial)
         }
 
-        $uri = "/platform/device_inventory/v1/devices/archive"
+        $uri = "platform/device_inventory/v1/devices/archive"
 
         $archive = Invoke-ArubaCLRestMethod -uri $uri  -body $_device -method POST @invokeParams -connection $connection
 
@@ -154,7 +154,7 @@ function Get-ArubaCLInventoryDevices {
             $invokeParams.add( 'offset', $offset )
         }
 
-        $uri = "/platform/device_inventory/v1/devices?sku_type=$type"
+        $uri = "platform/device_inventory/v1/devices?sku_type=$type"
 
         $device = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams -connection $connection
 
@@ -208,7 +208,7 @@ function Get-ArubaCLInventoryDevicesArchive {
             $invokeParams.add( 'offset', $offset )
         }
 
-        $uri = "/platform/device_inventory/v1/devices/archive"
+        $uri = "platform/device_inventory/v1/devices/archive"
 
         $archive = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams -connection $connection
 
@@ -257,7 +257,7 @@ function Get-ArubaCLInventoryDevicesStats {
     Process {
         $invokeParams = @{ }
 
-        $uri = "/platform/device_inventory/v1/devices/stats?sku_type=$type&service_type=$service"
+        $uri = "platform/device_inventory/v1/devices/stats?sku_type=$type&service_type=$service"
 
         $stats = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams -connection $connection
 
@@ -307,7 +307,7 @@ function Remove-ArubaCLInventoryDevicesArchive {
             "serials" = @($serial)
         }
 
-        $uri = "/platform/device_inventory/v1/devices/unarchive"
+        $uri = "platform/device_inventory/v1/devices/unarchive"
 
         if ($PSCmdlet.ShouldProcess($serial -join ",", 'Remove device from Archive')) {
             $archive = Invoke-ArubaCLRestMethod -uri $uri  -body $_device -method POST @invokeParams -connection $connection
