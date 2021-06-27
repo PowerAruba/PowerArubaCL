@@ -1,4 +1,4 @@
-#
+﻿#
 # Copyright, François-Xavier Cat @lazywinadmin
 # Based on https://github.com/lazywinadmin/PowerShell/blob/master/TOOL-Clean-MacAddress/Clean-MacAddress.ps1
 # Rename to Format-ArubaCLMacAddess (Valid pwsh verb) and no lower/upper case by default
