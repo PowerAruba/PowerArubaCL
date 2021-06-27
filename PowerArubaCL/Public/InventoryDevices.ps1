@@ -226,7 +226,7 @@ function Get-ArubaCLInventoryDevicesStats {
       Get Devices Stats on Aruba Central
 
       .DESCRIPTION
-      Get Devices Statson Aruba Central
+      Get Devices Stats on Aruba Central
 
       .EXAMPLE
       Get-ArubaCLInventoryDevicesStats -type IAP -service dm
