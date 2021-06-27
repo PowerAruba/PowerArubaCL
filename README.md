@@ -156,16 +156,14 @@ For example to get Devices for 2 different Aruba Central account
     $cl2 = Connect-ArubaCL -Region EU-1 -DefaultConnection:$false
 
 # Get number of Devices of first Aruba Central Account
-    Get-ArubaCLInventoryDevices -type IAP -connection $cl1).count
+    (Get-ArubaCLInventoryDevices -type IAP -connection $cl1).count
 
     80
 
-....
-# Get number of Devices of Second Aruba Ccount
-    Get-ArubaCLInventoryDevices -type IAP -connection $cl2).count
+# Get number of Devices of Second Aruba Central Account
+    (Get-ArubaCLInventoryDevices -type IAP -connection $cl2).count
 
     90
-...
 
 #Each cmdlet can use -connection parameter
 ```
@@ -175,7 +173,7 @@ Following API call, it is possible to have a limit return result.
 For Example Get-ArubaCLInventoryDevices return by default only the 50th first devices.
 if there is more of 50 devices, you get a warning,
 ```powershell
-    Get-ArubaCLInventoryDevices -type IAP).count
+    (Get-ArubaCLInventoryDevices -type IAP).count
     WARNING: There is extra items use -limit parameter to display
     50
 ```
