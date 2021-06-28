@@ -241,12 +241,19 @@ Currently, [@alagoutte](#author) started this project and will keep maintaining 
 
 # List of available command
 ```powershell
+Add-ArubaCLInventoryDevices
+Add-ArubaCLInventoryDevicesArchive
 Connect-ArubaCL
 Disconnect-ArubaCL
+Format-ArubaCLMacAddress
 Get-ArubaCLInventoryDevices
+Get-ArubaCLInventoryDevicesArchive
+Get-ArubaCLInventoryDevicesStats
 Invoke-ArubaCLRestMethod
+Remove-ArubaCLInventoryDevicesArchive
 Set-ArubaCLCipherSSL
 Show-ArubaCLException
+Update-ArubaCLRefreshToken
 ```
 
 # Author
