@@ -55,6 +55,13 @@ function Invoke-ArubaCLRestMethod {
             Throw "Not Connected. Connect to the Aruba Central with Connect-ArubaCL"
         }
 
+        #Check if the token will be expire on less of 15 minutes (or already expired)
+        $now = [int]((Get-Date -UFormat %s) -split ",")[0]
+        if (($connection.token.expire - $now) -le 15 * 60) {
+            Write-Warning "Token will expire soon, update token"
+            Update-ArubaCLRefreshToken -connection $connection
+        }
+
         $Server = $connection.Server
         $headers = $connection.headers
         $invokeParams = $connection.invokeParams
