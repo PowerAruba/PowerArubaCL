@@ -5,6 +5,8 @@
 #
 
 function Update-ArubaCLRefreshToken {
+
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'low')]
     Param(
         [Parameter(Mandatory = $false)]
         [psobject]$connection = $DefaultArubaCLConnection
@@ -15,12 +17,14 @@ function Update-ArubaCLRefreshToken {
     $headers = @{ Accept = "application/json"; "Content-type" = "application/json" }
 
     Write-Verbose $url
-    try {
-        $response = Invoke-RestMethod $url -Method POST -WebSession $connection.session -headers $headers
-    }
-    catch {
-        Show-ArubaCLException $_
-        throw "Unable to get token"
+    if ($PSCmdlet.ShouldProcess($connection.token.client_id, 'Update Refresh Token')) {
+        try {
+            $response = Invoke-RestMethod $url -Method POST -WebSession $connection.session -headers $headers
+        }
+        catch {
+            Show-ArubaCLException $_
+            throw "Unable to get token"
+        }
     }
     Write-Verbose $response
     #Update Headers
