@@ -48,11 +48,60 @@ function Add-ArubaCLInventoryDevices {
             "serial" = $serial
         }
 
-        $uri = "/platform/device_inventory/v1/devices"
+        $uri = "platform/device_inventory/v1/devices"
 
         $device = Invoke-ArubaCLRestMethod -uri $uri -method POST -body $_device @invokeParams -connection $connection
 
         $device.result
+    }
+
+    End {
+    }
+}
+
+function Add-ArubaCLInventoryDevicesArchive {
+
+    <#
+      .SYNOPSIS
+      Add Archived Devices on Aruba Central
+
+      .DESCRIPTION
+      Add Archived Devices on Aruba Central
+
+      .EXAMPLE
+      Add-ArubaCLInventoryDevicesArchive -serial CT05848405
+
+      Add Device with Serial CT05848405 on Archive
+
+      .EXAMPLE
+      Add-ArubaCLInventoryDevicesArchive -serial CT05848405, CT05848406
+
+      Add Devices with Serial CT05848405 and CT05848406 on Archive
+    #>
+
+    Param(
+        [Parameter(Mandatory = $true)]
+        [string[]]$serial,
+        [Parameter (Mandatory = $False)]
+        [ValidateNotNullOrEmpty()]
+        [PSObject]$connection = $DefaultArubaCLConnection
+    )
+
+    Begin {
+    }
+
+    Process {
+        $invokeParams = @{ }
+
+        $_device = @{
+            "serials" = @($serial)
+        }
+
+        $uri = "platform/device_inventory/v1/devices/archive"
+
+        $archive = Invoke-ArubaCLRestMethod -uri $uri  -body $_device -method POST @invokeParams -connection $connection
+
+        $archive
     }
 
     End {
@@ -96,9 +145,6 @@ function Get-ArubaCLInventoryDevices {
     }
 
     Process {
-
-
-
         $invokeParams = @{ }
 
         if ( $PsBoundParameters.ContainsKey('limit') ) {
@@ -108,12 +154,166 @@ function Get-ArubaCLInventoryDevices {
             $invokeParams.add( 'offset', $offset )
         }
 
-        $uri = "/platform/device_inventory/v1/devices?sku_type=$type"
+        $uri = "platform/device_inventory/v1/devices?sku_type=$type"
 
         $device = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams -connection $connection
 
         $device.devices
+    }
 
+    End {
+    }
+}
+
+function Get-ArubaCLInventoryDevicesArchive {
+
+    <#
+      .SYNOPSIS
+      Get Archived Devices on Aruba Central
+
+      .DESCRIPTION
+      Get Archived Devices on Aruba Central
+
+      .EXAMPLE
+      Get-ArubaCLInventoryDevicesArchive
+
+      Get Archived Device for IAP of service DM
+
+     .EXAMPLE
+      Get-ArubaCLInventoryDevices -limit 2000 -offset 0
+
+      Get Archived Devices (Limit 2000, starting offset at 0)
+    #>
+
+    Param(
+        [Parameter(Mandatory = $false)]
+        [int]$offset,
+        [Parameter(Mandatory = $false)]
+        [int]$limit,
+        [Parameter (Mandatory = $False)]
+        [ValidateNotNullOrEmpty()]
+        [PSObject]$connection = $DefaultArubaCLConnection
+    )
+
+    Begin {
+    }
+
+    Process {
+        $invokeParams = @{ }
+
+        if ( $PsBoundParameters.ContainsKey('limit') ) {
+            $invokeParams.add( 'limit', $limit )
+        }
+        if ( $PsBoundParameters.ContainsKey('offset') ) {
+            $invokeParams.add( 'offset', $offset )
+        }
+
+        $uri = "platform/device_inventory/v1/devices/archive"
+
+        $archive = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams -connection $connection
+
+        $archive.devices
+    }
+
+    End {
+    }
+}
+
+function Get-ArubaCLInventoryDevicesStats {
+
+    <#
+      .SYNOPSIS
+      Get Devices Stats on Aruba Central
+
+      .DESCRIPTION
+      Get Devices Stats on Aruba Central
+
+      .EXAMPLE
+      Get-ArubaCLInventoryDevicesStats -type IAP -service dm
+
+      Get Device Stats for IAP of service DM
+
+     .EXAMPLE
+      Get-ArubaCLInventoryDevices -type MAS -service pa
+
+      Get Device Stats for MAS of service PA
+    #>
+
+    Param(
+        [Parameter(Mandatory = $true, position = 1)]
+        [ValidateSet('IAP', 'MAS')]
+        [String]$type,
+        [Parameter(Mandatory = $true)]
+        [ValidateSet('dm', 'pa')]
+        [String]$service,
+        [Parameter (Mandatory = $False)]
+        [ValidateNotNullOrEmpty()]
+        [PSObject]$connection = $DefaultArubaCLConnection
+    )
+
+    Begin {
+    }
+
+    Process {
+        $invokeParams = @{ }
+
+        $uri = "platform/device_inventory/v1/devices/stats?sku_type=$type&service_type=$service"
+
+        $stats = Invoke-ArubaCLRestMethod -uri $uri -method GET @invokeParams -connection $connection
+
+        $stats
+    }
+
+    End {
+    }
+}
+
+function Remove-ArubaCLInventoryDevicesArchive {
+
+    <#
+      .SYNOPSIS
+      Remove Archived Devices on Aruba Central
+
+      .DESCRIPTION
+      Remove Archived Devices on Aruba Central
+
+      .EXAMPLE
+      Remove-ArubaCLInventoryDevicesArchive -serial CT05848405
+
+      Remove Device with Serial CT05848405 on Archive
+
+      .EXAMPLE
+      Remove-ArubaCLInventoryDevicesArchive -serial CT05848405, CT05848406
+
+      Remove Devices with Serial CT05848405 and CT05848406 on Archive
+    #>
+
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'medium')]
+    Param(
+        [Parameter(Mandatory = $true)]
+        [string[]]$serial,
+        [Parameter (Mandatory = $False)]
+        [ValidateNotNullOrEmpty()]
+        [PSObject]$connection = $DefaultArubaCLConnection
+    )
+
+    Begin {
+    }
+
+    Process {
+        $invokeParams = @{ }
+
+        $_device = @{
+            "serials" = @($serial)
+        }
+
+        $uri = "platform/device_inventory/v1/devices/unarchive"
+
+        if ($PSCmdlet.ShouldProcess($serial -join ",", 'Remove device from Archive')) {
+            $archive = Invoke-ArubaCLRestMethod -uri $uri  -body $_device -method POST @invokeParams -connection $connection
+
+            $archive
+        }
     }
 
     End {
