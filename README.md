@@ -7,7 +7,7 @@ This is a Powershell module for manage Aruba Central
 <img src="https://raw.githubusercontent.com/PowerAruba/PowerArubaCL/master/Medias/PowerArubaCL.png" width="250" height="250" />
 </p>
 
-With this module (version 0.1.0) you can manage:
+With this module (version 0.2.0) you can manage:
 
 - [Inventory](#Inventory) (Add/Get Devices, Add/Get/Remove Archived Devices, Get Stats)
 
@@ -241,12 +241,19 @@ Currently, [@alagoutte](#author) started this project and will keep maintaining 
 
 # List of available command
 ```powershell
+Add-ArubaCLInventoryDevices
+Add-ArubaCLInventoryDevicesArchive
 Connect-ArubaCL
 Disconnect-ArubaCL
+Format-ArubaCLMacAddress
 Get-ArubaCLInventoryDevices
+Get-ArubaCLInventoryDevicesArchive
+Get-ArubaCLInventoryDevicesStats
 Invoke-ArubaCLRestMethod
+Remove-ArubaCLInventoryDevicesArchive
 Set-ArubaCLCipherSSL
 Show-ArubaCLException
+Update-ArubaCLRefreshToken
 ```
 
 # Author
