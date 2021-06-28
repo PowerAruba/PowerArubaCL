@@ -182,7 +182,7 @@ function Connect-ArubaCL {
         $connection.token.access_token = $response.access_token
         $connection.token.refresh_token = $response.refresh_token
         #Get when token will be expire
-        $connection.token.expire = [int](Get-Date -UFormat %s) + $response.expires_in
+        $connection.token.expire = [int]((Get-Date -UFormat %s) -split ",")[0] + $response.expires_in
 
         if ( $DefaultConnection ) {
             Set-Variable -name DefaultArubaCLConnection -value $connection -scope Global
