@@ -232,7 +232,7 @@ Contribution and feature requests are more than welcome. Please use the followin
 
   * For bugs and [issues](https://github.com/PowerAruba/PowerArubaCL/issues), please use the [issues](https://github.com/PowerAruba/PowerArubaCL/issues) register with details of the problem.
   * For Feature Requests, please use the [issues](https://github.com/PowerAruba/PowerArubaCL/issues) register with details of what's required.
-  * For code contribution (bug fixes, or feature request), please request fork PowerFGT, create a feature/fix branch, add tests if needed then submit a pull request.
+  * For code contribution (bug fixes, or feature request), please request fork [PowerArubaCL](https://github.com/PowerAruba/PowerArubaCL/fork), create a feature/fix branch, add tests if needed then submit a pull request.
 
 # Contact
 
