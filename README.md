@@ -1,5 +1,5 @@
 
-# PowerArubaCP
+# PowerArubaCL
 
 This is a Powershell module for manage Aruba Central
 
