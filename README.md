@@ -14,6 +14,7 @@ With this module (version 0.2.0) you can manage:
 There is some extra feature
 - [Invoke API](#Invoke-API)
 - [Multi Connection](#MultiConnection)
+- [Refresh Token](#Refresh-Token)
 
 More functionality will be added later.
 
@@ -198,6 +199,12 @@ For example to get Devices for 2 different Aruba Central account
 
 #Each cmdlet can use -connection parameter
 ```
+
+### Refresh-Token
+By default, the (access) token is valid for 7200 seconds (2 hours), PowerArubaCL store the refresh_token (valid for 14days ?)
+and automatically update (access) token when it is expired (or it will be expire on less of 15 minutes).
+If you need to renew token before you can use _Update-ArubaCLRefreshToken_ cmdlet
+
 
 ### Limit
 Following API call, it is possible to have a limit return result.
