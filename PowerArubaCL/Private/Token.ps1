@@ -36,6 +36,7 @@ function Update-ArubaCLRefreshToken {
     #Get when new token will be expire
     $connection.token.expire = [int]((Get-Date -UFormat %s) -split ",")[0] + $response.expires_in
 }
+
 function Get-ArubaCLTokenStatus {
     <#
     .SYNOPSIS
@@ -46,16 +47,20 @@ function Get-ArubaCLTokenStatus {
 
     .EXAMPLE
     Get-ArubaCLTokenStatus
-#>
+    #>
+
     Param(
         [Parameter(Mandatory = $false)]
         [psobject]$connection = $DefaultArubaCLConnection
     )
+
     $expire = $connection.token.expire
     $now = [int]((Get-Date -UFormat %s) -split ",")[0]
     if (($expire - $now) -le 0) {
         # If token is expired, it should fail boolean
         return $false
     }
-    else { return $true }
+    else {
+        return $true
+    }
 }
