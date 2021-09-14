@@ -33,7 +33,7 @@ function Connect-ArubaCL {
 
     Param(
         [Parameter(Mandatory = $true, position = 1)]
-        [ValidateSet('APAC-1', 'APAC-EAST1', 'APAC-SOUTH1', 'Canada-1', 'China-1', 'EU-1', 'US-1', 'US-2')]
+        [ValidateSet('APAC-1', 'APAC-EAST1', 'APAC-SOUTH1', 'Canada-1', 'China-1', 'EU-1', 'US-1', 'US-2', 'US-4')]
         [String]$region,
         [Parameter(Mandatory = $false)]
         [String]$Username,
@@ -56,7 +56,7 @@ function Connect-ArubaCL {
 
     Process {
 
-        $token = @{access_token = ""; refresh_token = ""; expire = ""; client_id = ""; client_secret = "";}
+        $token = @{access_token = ""; refresh_token = ""; expire = ""; client_id = ""; client_secret = ""; }
         $connection = @{server = ""; session = ""; token = $token; headers = ""; invokeParams = "" }
         $invokeParams = @{ UseBasicParsing = $true; }
 
@@ -108,6 +108,9 @@ function Connect-ArubaCL {
             }
             'US-2' {
                 $server = "apigw-prod2.central.arubanetworks.com"
+            }
+            'US-4' {
+                $server = "apigw-uswest4.central.arubanetworks.com"
             }
         }
 
