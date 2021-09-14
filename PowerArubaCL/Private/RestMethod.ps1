@@ -56,7 +56,7 @@ function Invoke-ArubaCLRestMethod {
         }
 
         #Check if the token will be expire on less of 15 minutes (or already expired)
-        if (Get-ArubaCLTokenStatus -timeout 15*60 -connection $connection) {
+        if (-not (Get-ArubaCLTokenStatus -timeout (15 * 60) -connection $connection)) {
             Write-Warning "Token will expire soon, update token"
             Update-ArubaCLRefreshToken -connection $connection
         }
