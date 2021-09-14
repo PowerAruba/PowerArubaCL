@@ -109,7 +109,7 @@ function Connect-ArubaCL {
             'US-2' {
                 $server = "apigw-prod2.central.arubanetworks.com"
             }
-            'US-4' {
+            'US-WEST4' {
                 $server = "apigw-uswest4.central.arubanetworks.com"
             }
         }
