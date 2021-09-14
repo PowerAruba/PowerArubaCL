@@ -256,6 +256,7 @@ Format-ArubaCLMacAddress
 Get-ArubaCLInventoryDevices
 Get-ArubaCLInventoryDevicesArchive
 Get-ArubaCLInventoryDevicesStats
+Get-ArubaCLTokenStatus
 Invoke-ArubaCLRestMethod
 Remove-ArubaCLInventoryDevicesArchive
 Set-ArubaCLCipherSSL
@@ -273,6 +274,7 @@ Update-ArubaCLRefreshToken
 
 - Cédric Moreau
 - cmcknz77
+- Zak
 
 Sort by name (*git shortlog -s*)
 
