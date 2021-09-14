@@ -33,7 +33,7 @@ function Connect-ArubaCL {
 
     Param(
         [Parameter(Mandatory = $true, position = 1)]
-        [ValidateSet('APAC-1', 'APAC-EAST1', 'APAC-SOUTH1', 'Canada-1', 'China-1', 'EU-1', 'US-1', 'US-2', 'US-4')]
+        [ValidateSet('APAC-1', 'APAC-EAST1', 'APAC-SOUTH1', 'Canada-1', 'China-1', 'EU-1', 'US-1', 'US-2', 'US-WEST4')]
         [String]$region,
         [Parameter(Mandatory = $false)]
         [String]$Username,
