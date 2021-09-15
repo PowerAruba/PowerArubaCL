@@ -115,9 +115,6 @@ function Connect-ArubaCL {
             'US-WEST4' {
                 $server = "apigw-uswest4.central.arubanetworks.com"
             }
-            'US-WEST4' {
-                $server = "apigw-uswest4.central.arubanetworks.com"
-            }
         }
 
         $postParams = @{username = $Credential.username; password = $Credential.GetNetworkCredential().Password }
